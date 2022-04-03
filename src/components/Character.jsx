@@ -14,15 +14,20 @@ export const Div2 = styled.div`
 `;
 
 const Character = () => {
-  const URL = process.env.REACT_APP_API_KEY_MARVEL;
   const [character, setCharacter] = useState([]);
 
   const getCharacter = () => {
-    fetch(`${URL}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setCharacter(data.data.results);
-      });
+    try {
+      fetch(
+        "https://gateway.marvel.com:443/v1/public/characters?ts=1&apikey=6ba682d821d6c7780b1faee6dbe14ed9&hash=3b68c005c66af546ba1d65845f7a88dd"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setCharacter(data.data.results);
+        });
+    } catch (error) {
+      throw new Error(error);
+    }
   };
 
   useEffect(() => {
