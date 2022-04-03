@@ -17,15 +17,17 @@ const Character = () => {
   const URL = process.env.REACT_APP_API_KEY_MARVEL;
   const [character, setCharacter] = useState([]);
 
-  const getCharacter = async () => {
-    let response = await fetch(`${URL}`);
-    const data = await response.json();
-    setCharacter(data.data.results);
+  const getCharacter = () => {
+    fetch(`${URL}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCharacter(data.data.results);
+      });
   };
 
-  useEffect(() => {
-    getCharacter();
-  }, []);
+  // useEffect(() => {
+  //   getCharacter();
+  // }, []);
 
   return (
     <Div>
